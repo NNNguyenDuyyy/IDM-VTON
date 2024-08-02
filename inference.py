@@ -94,30 +94,30 @@ class VitonHDTestDataset(data.Dataset):
         )
         self.toTensor = transforms.ToTensor()
 
-        with open(
-            os.path.join(dataroot_path, phase, "vitonhd_" + phase + "_tagged.json"), "r"
-        ) as file1:
-            data1 = json.load(file1)
+        # with open(
+        #     os.path.join(dataroot_path, phase, "vitonhd_" + phase + "_tagged.json"), "r"
+        # ) as file1:
+        #     data1 = json.load(file1)
 
-        annotation_list = [
-            "sleeveLength",
-            "neckLine",
-            "item",
-        ]
+        # annotation_list = [
+        #     "sleeveLength",
+        #     "neckLine",
+        #     "item",
+        # ]
 
-        self.annotation_pair = {}
-        for k, v in data1.items():
-            for elem in v:
-                annotation_str = ""
-                for template in annotation_list:
-                    for tag in elem["tag_info"]:
-                        if (
-                            tag["tag_name"] == template
-                            and tag["tag_category"] is not None
-                        ):
-                            annotation_str += tag["tag_category"]
-                            annotation_str += " "
-                self.annotation_pair[elem["file_name"]] = annotation_str
+        # self.annotation_pair = {}
+        # for k, v in data1.items():
+        #     for elem in v:
+        #         annotation_str = ""
+        #         for template in annotation_list:
+        #             for tag in elem["tag_info"]:
+        #                 if (
+        #                     tag["tag_name"] == template
+        #                     and tag["tag_category"] is not None
+        #                 ):
+        #                     annotation_str += tag["tag_category"]
+        #                     annotation_str += " "
+        #         self.annotation_pair[elem["file_name"]] = annotation_str
 
         self.order = order
         self.toTensor = transforms.ToTensor()
@@ -155,10 +155,11 @@ class VitonHDTestDataset(data.Dataset):
     def __getitem__(self, index):
         c_name = self.c_names[index]
         im_name = self.im_names[index]
-        if c_name in self.annotation_pair:
-            cloth_annotation = self.annotation_pair[c_name]
-        else:
-            cloth_annotation = "shirts"
+        # if c_name in self.annotation_pair:
+        #     cloth_annotation = self.annotation_pair[c_name]
+        # else:
+        #     cloth_annotation = "shirts"
+        cloth_annotation = "shirts"
         cloth = Image.open(os.path.join(self.dataroot, self.phase, "cloth", c_name))
 
         im_pil_big = Image.open(
