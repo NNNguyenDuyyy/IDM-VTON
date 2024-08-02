@@ -419,7 +419,7 @@ def main():
                         x_sample = pil_to_tensor(images[i])
                         torchvision.utils.save_image(x_sample,os.path.join(args.output_dir,sample['im_name'][i]))
                 
-
+    print('Dy dep trai')
 
 
 if __name__ == "__main__":
